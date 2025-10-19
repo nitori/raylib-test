@@ -36,7 +36,7 @@ extern ECS_COMPONENT_DECLARE(Scale);
 extern ECS_COMPONENT_DECLARE(Velocity);
 extern ECS_COMPONENT_DECLARE(Capsule3D);
 
-extern ECS_TAG_DECLARE(IsPlayer);
+extern ECS_TAG_DECLARE(PlayerTag);
 extern ECS_TAG_DECLARE(Local);
 extern ECS_TAG_DECLARE(World);
 

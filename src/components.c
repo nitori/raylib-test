@@ -7,7 +7,7 @@ ECS_COMPONENT_DECLARE(Rotation);
 ECS_COMPONENT_DECLARE(Scale);
 ECS_COMPONENT_DECLARE(Velocity);
 ECS_COMPONENT_DECLARE(Capsule3D);
-ECS_TAG_DECLARE(IsPlayer);
+ECS_TAG_DECLARE(PlayerTag);
 ECS_TAG_DECLARE(Local);
 ECS_TAG_DECLARE(World);
 
@@ -50,7 +50,7 @@ void InitWorld(int argc, char *argv[])
     ECS_COMPONENT_DEFINE(world, Velocity);
     ECS_COMPONENT_DEFINE(world, Capsule3D);
 
-    ECS_TAG_DEFINE(world, IsPlayer);
+    ECS_TAG_DEFINE(world, PlayerTag);
     ECS_TAG_DEFINE(world, Local);
     ECS_TAG_DEFINE(world, World);
 }

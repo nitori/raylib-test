@@ -27,7 +27,7 @@ void setup_systems()
     ecs_add_pair(world, DrawPhase, EcsDependsOn, GlobalTransformPhase);
 
     ECS_SYSTEM(world, SystemSetup, EcsOnStart);
-    ECS_SYSTEM(world, SystemUpdate, EcsOnUpdate, [out] Translation, [in] IsPlayer);
+    ECS_SYSTEM(world, SystemUpdate, EcsOnUpdate, [out] Translation, [in] PlayerTag);
     ECS_SYSTEM(world, SystemUpdateWorldTransforms, GlobalTransformPhase,
                [in] Translation,
                [out] (Translation, World),
@@ -39,8 +39,8 @@ void SystemSetup(ecs_iter_t *it)
 {
     ecs_entity_t player = ecs_entity(world, {.name = "Player"});
     // world and local translation
-    ecs_add(world, player, IsPlayer);
-    ecs_set_pair(world, player, Translation, World, {0});
+    ecs_add(world, player, PlayerTag);
+    ecs_set_pair(world, player, Translation, World, {0}); // computed
     ecs_set(world, player, Translation, {0, 3., 0});
     ecs_set(world, player, Capsule3D, {
             .center = {0},
@@ -51,7 +51,7 @@ void SystemSetup(ecs_iter_t *it)
 
     ecs_entity_t hat = ecs_entity(world, {.name = "Hat"});
     ecs_add_pair(world, hat, EcsChildOf, player);
-    ecs_set_pair(world, hat, Translation, World, {1, 1, 1});
+    ecs_set_pair(world, hat, Translation, World, {0}); // computed
     ecs_set(world, hat, Translation, {0.5f, 2.f, -0.5f});
     ecs_set(world, hat, Capsule3D, {
             .center = {0},
@@ -124,9 +124,9 @@ int main(const int argc, char *argv[])
     InitWorld(argc, argv);
 
     // rest api stuff
-    ECS_IMPORT(world, FlecsStats);
-    ecs_singleton_set(world, EcsRest, {0});
-    RegsiterComponentReflection();
+    //ECS_IMPORT(world, FlecsStats);
+    //ecs_singleton_set(world, EcsRest, {0});
+    //RegsiterComponentReflection();
     // rest api stuff end
 
     setup_systems();
